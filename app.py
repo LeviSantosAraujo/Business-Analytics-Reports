@@ -22,13 +22,24 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'business-analytics-dashboard-2025'
 
 # Set style for better looking charts
-plt.style.use('seaborn-v0_8')
+try:
+    plt.style.use('seaborn-v0_8')
+except:
+    try:
+        plt.style.use('seaborn')
+    except:
+        plt.style.use('default')
 sns.set_palette("husl")
 
 # Load and prepare the data
 def load_data(filepath='DevicesData.xlsx'):
     """Load and clean the stock data"""
     try:
+        # Check if file exists
+        if not os.path.exists(filepath):
+            print(f"Data file {filepath} not found, using sample data")
+            return create_sample_data()
+        
         df = pd.read_excel(filepath)
         # Split the single column into multiple columns
         df_split = df.iloc[:, 0].str.split(',', expand=True)
@@ -44,7 +55,28 @@ def load_data(filepath='DevicesData.xlsx'):
         return df_split
     except Exception as e:
         print(f"Error loading data: {e}")
-        return None
+        return create_sample_data()
+
+def create_sample_data():
+    """Create sample data for demonstration"""
+    dates = pd.date_range('2020-01-01', '2023-12-31', freq='D')
+    np.random.seed(42)
+    
+    # Generate realistic stock-like data
+    price = 100 + np.cumsum(np.random.randn(len(dates)) * 0.02)
+    volume = np.random.randint(1000000, 5000000, len(dates))
+    
+    data = {
+        'Open': price * (1 + np.random.randn(len(dates)) * 0.01),
+        'High': price * (1 + np.abs(np.random.randn(len(dates))) * 0.02),
+        'Low': price * (1 - np.abs(np.random.randn(len(dates))) * 0.02),
+        'Close': price,
+        'Adj Close': price,
+        'Volume': volume
+    }
+    
+    df = pd.DataFrame(data, index=dates)
+    return df
 
 # Analytics functions
 def descriptive_analytics(df):
