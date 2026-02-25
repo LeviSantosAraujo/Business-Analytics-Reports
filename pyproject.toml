@@ -9,10 +9,10 @@ description = "Comprehensive Python-based business analytics solution for stock 
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
-    {name = "Business Analytics Team", email = "analytics@company.com"}
+    {name = "Levi Santos Araujo", email = "levi.santos.araujo@example.com"}
 ]
 maintainers = [
-    {name = "Business Analytics Team", email = "analytics@company.com"}
+    {name = "Levi Santos Araujo", email = "levi.santos.araujo@example.com"}
 ]
 keywords = [
     "business analytics",
@@ -83,11 +83,11 @@ all = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/company/business-analytics-dashboard"
-Documentation = "https://github.com/company/business-analytics-dashboard/wiki"
-Repository = "https://github.com/company/business-analytics-dashboard.git"
-"Bug Tracker" = "https://github.com/company/business-analytics-dashboard/issues"
-Changelog = "https://github.com/company/business-analytics-dashboard/blob/main/CHANGELOG.md"
+Homepage = "https://github.com/LeviSantosAraujo/Business-Analytics-Reports"
+Documentation = "https://github.com/LeviSantosAraujo/Business-Analytics-Reports/wiki"
+Repository = "https://github.com/LeviSantosAraujo/Business-Analytics-Reports.git"
+"Bug Tracker" = "https://github.com/LeviSantosAraujo/Business-Analytics-Reports/issues"
+Changelog = "https://github.com/LeviSantosAraujo/Business-Analytics-Reports/blob/main/CHANGELOG.md"
 
 [project.scripts]
 business-analytics = "comprehensive_analytics:main"

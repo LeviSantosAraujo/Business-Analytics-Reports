@@ -14,12 +14,12 @@ with open("requirements.txt", "r", encoding="utf-8") as fh:
 setup(
     name="business-analytics-dashboard",
     version="1.0.0",
-    author="Business Analytics Team",
-    author_email="analytics@company.com",
+    author="Levi Santos Araujo",
+    author_email="levi.santos.araujo@example.com",
     description="Comprehensive Python-based business analytics solution for stock market data",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/company/business-analytics-dashboard",
+    url="https://github.com/LeviSantosAraujo/Business-Analytics-Reports",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 5 - Production/Stable",
@@ -57,8 +57,8 @@ setup(
     },
     keywords="business analytics, stock market, financial analysis, reporting, excel, charts",
     project_urls={
-        "Bug Reports": "https://github.com/company/business-analytics-dashboard/issues",
-        "Source": "https://github.com/company/business-analytics-dashboard",
-        "Documentation": "https://github.com/company/business-analytics-dashboard/wiki",
+        "Bug Reports": "https://github.com/LeviSantosAraujo/Business-Analytics-Reports/issues",
+        "Source": "https://github.com/LeviSantosAraujo/Business-Analytics-Reports",
+        "Documentation": "https://github.com/LeviSantosAraujo/Business-Analytics-Reports/wiki",
     },
 )
