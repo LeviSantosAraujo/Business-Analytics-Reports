@@ -93,41 +93,145 @@
         <div class="hero-section text-center">
             <div class="container">
                 <h1 class="display-4 fw-bold mb-4">Business Analytics Dashboard</h1>
-                <p class="lead mb-4">Professional analytics solution for business insights</p>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="metric-card">
-                            <h3><i class="fas fa-chart-bar text-primary"></i> Analytics</h3>
-                            <p>Comprehensive data analysis and reporting</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="metric-card">
-                            <h3><i class="fas fa-chart-line text-success"></i> Insights</h3>
-                            <p>Real-time business intelligence</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="metric-card">
-                            <h3><i class="fas fa-chart-pie text-info"></i> Reports</h3>
-                            <p>Professional reporting solutions</p>
+                <p class="lead mb-4">Professional analytics solution for comprehensive business insights</p>
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <p class="mb-4">Transform your raw data into actionable insights with our powerful analytics platform. Get real-time business intelligence, interactive visualizations, and comprehensive reporting capabilities.</p>
+                        <div class="d-flex justify-content-center gap-3">
+                            <button class="btn btn-light btn-lg" onclick="showSection('dashboard')">
+                                <i class="fas fa-chart-line me-2"></i>View Dashboard
+                            </button>
+                            <button class="btn btn-outline-light btn-lg" onclick="showSection('about')">
+                                <i class="fas fa-info-circle me-2"></i>Learn More
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Features Section -->
+        <!-- Key Features -->
         <div class="container py-5">
-            <h2 class="text-center mb-4">Platform Features</h2>
+            <h2 class="text-center mb-5">Platform Capabilities</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="metric-card text-center">
+                        <div class="feature-icon text-primary mb-3">
+                            <i class="fas fa-chart-bar fa-3x"></i>
+                        </div>
+                        <h4>Advanced Analytics</h4>
+                        <p>Sophisticated data processing and analysis capabilities with powerful algorithms and statistical methods for deep business insights.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="metric-card text-center">
+                        <div class="feature-icon text-success mb-3">
+                            <i class="fas fa-database fa-3x"></i>
+                        </div>
+                        <h4>Data Processing</h4>
+                        <p>Efficient handling of large datasets with automated cleaning, transformation, and preparation for comprehensive analysis.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="metric-card text-center">
+                        <div class="feature-icon text-info mb-3">
+                            <i class="fas fa-chart-line fa-3x"></i>
+                        </div>
+                        <h4>Visualization</h4>
+                        <p>Interactive charts and visual representations that make complex data easy to understand, explore, and present to stakeholders.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Analytics Overview -->
+        <div class="container py-4">
             <div class="row">
                 <div class="col-md-6">
-                    <h4><i class="fas fa-cogs me-2"></i>Advanced Analytics</h4>
-                    <p>Powerful data processing and analysis capabilities</p>
+                    <div class="chart-container">
+                        <h4><i class="fas fa-chart-pie me-2"></i>Analytics Modules</h4>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="metric-card text-center mb-3">
+                                    <i class="fas fa-chart-bar text-primary"></i>
+                                    <h6>Descriptive</h6>
+                                    <small>Basic statistics and overview</small>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="metric-card text-center mb-3">
+                                    <i class="fas fa-clock text-info"></i>
+                                    <h6>Time Series</h6>
+                                    <small>Trend analysis and forecasting</small>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="metric-card text-center mb-3">
+                                    <i class="fas fa-bell text-warning"></i>
+                                    <h6>Technical</h6>
+                                    <small>Indicators and signals</small>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="metric-card text-center mb-3">
+                                    <i class="fas fa-shield-alt text-success"></i>
+                                    <h6>Risk</h6>
+                                    <small>Risk assessment and management</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-6">
-                    <h4><i class="fas fa-shield-alt me-2"></i>Secure Platform</h4>
-                    <p>Enterprise-grade security and reliability</p>
+                    <div class="chart-container">
+                        <h4><i class="fas fa-trophy me-2"></i>Key Performance Metrics</h4>
+                        <div class="row text-center">
+                            <div class="col-6">
+                                <div class="metric-card">
+                                    <div class="metric-value text-success">3,647%</div>
+                                    <div class="metric-label">Total Return</div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="metric-card">
+                                    <div class="metric-value text-info">8.72%</div>
+                                    <div class="metric-label">Annual Return</div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="metric-card">
+                                    <div class="metric-value text-warning">24.5%</div>
+                                    <div class="metric-label">Volatility</div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="metric-card">
+                                    <div class="metric-value text-success">Bullish</div>
+                                    <div class="metric-label">Current Signal</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-8 mx-auto text-center">
+                    <div class="chart-container">
+                        <h3>Ready to Transform Your Data?</h3>
+                        <p class="lead mb-4">Get started with our professional analytics platform and unlock the full potential of your business data.</p>
+                        <div class="d-flex justify-content-center gap-3">
+                            <button class="btn btn-primary btn-lg" onclick="showSection('dashboard')">
+                                <i class="fas fa-rocket me-2"></i>Get Started
+                            </button>
+                            <button class="btn btn-outline-primary btn-lg" onclick="showSection('documentation')">
+                                <i class="fas fa-book me-2"></i>View Documentation
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
