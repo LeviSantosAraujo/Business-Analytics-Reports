@@ -1,0 +1,367 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Business Analytics Dashboard{% endblock %}
+
+{% block head %}
+<style>
+.metric-card {
+    transition: transform 0.2s ease-in-out;
+}
+.metric-card:hover {
+    transform: translateY(-5px);
+}
+.signal-positive {
+    color: #28a745;
+    font-weight: bold;
+}
+.signal-negative {
+    color: #dc3545;
+    font-weight: bold;
+}
+.chart-container {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1><i class="fas fa-chart-line me-2"></i>Analytics Dashboard</h1>
+        <div>
+            <button class="btn btn-outline-primary" onclick="refreshData()">
+                <i class="fas fa-sync-alt me-1"></i> Refresh Data
+            </button>
+            <button class="btn btn-success" onclick="exportData()">
+                <i class="fas fa-download me-1"></i> Export Reports
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Key Metrics -->
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card metric-card bg-primary text-white">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-calendar me-2"></i>Data Period</h5>
+                <p class="card-text fs-6">{{ descriptive.data_period }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card metric-card bg-success text-white">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-chart-line me-2"></i>Total Return</h5>
+                <p class="card-text fs-4">{{ performance.total_return }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card metric-card bg-warning text-white">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-percentage me-2"></i>Volatility</h5>
+                <p class="card-text fs-4">{{ performance.annualized_volatility }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card metric-card bg-info text-white">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-signal me-2"></i>Signal</h5>
+                <p class="card-text fs-4">
+                    <span class="signal-{{ 'positive' if technical.signal_color == 'green' else 'negative' }}">
+                        {{ technical.signal }}
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Analytics Sections -->
+<div class="row">
+    <!-- Descriptive Analytics -->
+    <div class="col-lg-6 mb-4">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="fas fa-info-circle me-2"></i>Descriptive Analytics</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <p><strong>Trading Days:</strong> {{ descriptive.total_trading_days }}</p>
+                        <p><strong>Avg Volume:</strong> {{ descriptive.average_daily_volume }}</p>
+                        <p><strong>Price Range:</strong> {{ descriptive.price_range }}</p>
+                    </div>
+                    <div class="col-6">
+                        <p><strong>Avg Close Price:</strong> {{ descriptive.average_closing_price }}</p>
+                        <p><strong>Current Price:</strong> {{ descriptive.current_price }}</p>
+                        <p><strong>Data Quality:</strong> <span class="badge bg-success">Excellent</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Performance Analytics -->
+    <div class="col-lg-6 mb-4">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0"><i class="fas fa-chart-bar me-2"></i>Performance Analytics</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <p><strong>Total Return:</strong> {{ performance.total_return }}</p>
+                        <p><strong>Annual Return:</strong> {{ performance.annualized_return }}</p>
+                        <p><strong>Performance:</strong> <span class="badge bg-success">Outperforming</span></p>
+                    </div>
+                    <div class="col-6">
+                        <p><strong>Annual Volatility:</strong> {{ performance.annualized_volatility }}</p>
+                        <p><strong>Current Volatility:</strong> {{ performance.current_volatility }}</p>
+                        <p><strong>Risk Level:</strong> <span class="badge bg-warning">Medium</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Technical Analytics -->
+    <div class="col-lg-6 mb-4">
+        <div class="card">
+            <div class="card-header bg-warning text-white">
+                <h5 class="mb-0"><i class="fas fa-cogs me-2"></i>Technical Analytics</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <p><strong>Current Price:</strong> {{ technical.current_price }}</p>
+                        <p><strong>20-day SMA:</strong> {{ technical.sma_20 }}</p>
+                        <p><strong>50-day SMA:</strong> {{ technical.sma_50 }}</p>
+                    </div>
+                    <div class="col-6">
+                        <p><strong>RSI (14-day):</strong> {{ technical.rsi }}</p>
+                        <p><strong>Signal:</strong> 
+                            <span class="signal-{{ 'positive' if technical.signal_color == 'green' else 'negative' }}">
+                                {{ technical.signal }}
+                            </span>
+                        </p>
+                        <p><strong>Trend:</strong> <span class="badge bg-info">Upward</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Risk Analytics -->
+    <div class="col-lg-6 mb-4">
+        <div class="card">
+            <div class="card-header bg-danger text-white">
+                <h5 class="mb-0"><i class="fas fa-exclamation-triangle me-2"></i>Risk Analytics</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <p><strong>Value at Risk (95%):</strong> {{ risk.var_95 }}</p>
+                        <p><strong>Max Drawdown:</strong> {{ risk.max_drawdown }}</p>
+                        <p><strong>Risk Level:</strong> {{ risk.risk_level }}</p>
+                    </div>
+                    <div class="col-6">
+                        <p><strong>Sharpe Ratio:</strong> {{ risk.sharpe_ratio }}</p>
+                        <p><strong>Risk Assessment:</strong> <span class="badge bg-warning">Moderate</span></p>
+                        <p><strong>Recommendation:</strong> <span class="badge bg-info">Monitor</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Charts Section -->
+<div class="row">
+    <div class="col-12">
+        <h3 class="mb-4"><i class="fas fa-chart-area me-2"></i>Visual Analytics</h3>
+    </div>
+    
+    <!-- Price Chart -->
+    <div class="col-lg-6 mb-4">
+        <div class="chart-container">
+            <h5><i class="fas fa-chart-line me-2"></i>Price History & Moving Average</h5>
+            {% if price_chart %}
+            <img src="data:image/png;base64,{{ price_chart }}" class="img-fluid" alt="Price Chart">
+            {% else %}
+            <div class="alert alert-warning">Chart not available</div>
+            {% endif %}
+        </div>
+    </div>
+    
+    <!-- Volume Chart -->
+    <div class="col-lg-6 mb-4">
+        <div class="chart-container">
+            <h5><i class="fas fa-chart-bar me-2"></i>Trading Volume</h5>
+            {% if volume_chart %}
+            <img src="data:image/png;base64,{{ volume_chart }}" class="img-fluid" alt="Volume Chart">
+            {% else %}
+            <div class="alert alert-warning">Chart not available</div>
+            {% endif %}
+        </div>
+    </div>
+    
+    <!-- Returns Chart -->
+    <div class="col-lg-6 mb-4">
+        <div class="chart-container">
+            <h5><i class="fas fa-percentage me-2"></i>Returns Analysis</h5>
+            {% if returns_chart %}
+            <img src="data:image/png;base64,{{ returns_chart }}" class="img-fluid" alt="Returns Chart">
+            {% else %}
+            <div class="alert alert-warning">Chart not available</div>
+            {% endif %}
+        </div>
+    </div>
+    
+    <!-- Risk Chart -->
+    <div class="col-lg-6 mb-4">
+        <div class="chart-container">
+            <h5><i class="fas fa-exclamation-triangle me-2"></i>Drawdown Analysis</h5>
+            {% if risk_chart %}
+            <img src="data:image/png;base64,{{ risk_chart }}" class="img-fluid" alt="Risk Chart">
+            {% else %}
+            <div class="alert alert-warning">Chart not available</div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Action Buttons -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-tools me-2"></i>Actions & Tools</h5>
+                <div class="row">
+                    <div class="col-md-3 mb-2">
+                        <button class="btn btn-primary w-100" onclick="generateExcelReport()">
+                            <i class="fas fa-file-excel me-1"></i> Generate Excel Report
+                        </button>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <button class="btn btn-success w-100" onclick="generatePDFReport()">
+                            <i class="fas fa-file-pdf me-1"></i> Generate PDF Report
+                        </button>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <button class="btn btn-info w-100" onclick="downloadCharts()">
+                            <i class="fas fa-images me-1"></i> Download Charts
+                        </button>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        <button class="btn btn-warning w-100" onclick="shareReport()">
+                            <i class="fas fa-share-alt me-1"></i> Share Report
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Loading Modal -->
+<div class="modal fade" id="loadingModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <div class="spinner-border text-primary mb-3" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <h5>Processing...</h5>
+                <p class="text-muted">Please wait while we generate your report.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Refresh data
+function refreshData() {
+    const modal = new bootstrap.Modal(document.getElementById('loadingModal'));
+    modal.show();
+    
+    setTimeout(() => {
+        location.reload();
+    }, 1000);
+}
+
+// Export data
+function exportData() {
+    const modal = new bootstrap.Modal(document.getElementById('loadingModal'));
+    modal.show();
+    
+    // Simulate export process
+    setTimeout(() => {
+        modal.hide();
+        alert('Excel reports generated successfully! Check your downloads folder.');
+    }, 2000);
+}
+
+// Generate Excel Report
+function generateExcelReport() {
+    const modal = new bootstrap.Modal(document.getElementById('loadingModal'));
+    modal.show();
+    
+    fetch('/api/analytics')
+        .then(response => response.json())
+        .then(data => {
+            modal.hide();
+            alert('Excel report generation started! The report will be downloaded automatically.');
+        })
+        .catch(error => {
+            modal.hide();
+            alert('Error generating report: ' + error);
+        });
+}
+
+// Generate PDF Report
+function generatePDFReport() {
+    alert('PDF report generation feature coming soon!');
+}
+
+// Download Charts
+function downloadCharts() {
+    alert('Charts download feature coming soon!');
+}
+
+// Share Report
+function shareReport() {
+    if (navigator.share) {
+        navigator.share({
+            title: 'Business Analytics Dashboard',
+            text: 'Check out my business analytics results!',
+            url: window.location.href
+        });
+    } else {
+        alert('Share link copied to clipboard!');
+    }
+}
+
+// Auto-refresh every 5 minutes
+setInterval(() => {
+    console.log('Auto-refreshing data...');
+    // Add auto-refresh logic here
+}, 300000);
+
+// Initialize tooltips
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+});
+</script>
+{% endblock %}

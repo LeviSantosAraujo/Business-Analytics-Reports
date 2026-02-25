@@ -152,9 +152,12 @@ temp/
 logs/
 *.log
 data/
-*.csv
-*.json
 backup/
+
+# Allow deployment configurations
+!vercel.json
+!netlify.toml
+!.vercel
 
 # Sensitive information
 config_local.py

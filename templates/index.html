@@ -1,0 +1,271 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Business Analytics Dashboard{% endblock %}
+
+{% block content %}
+<div class="hero-section text-center py-5 mb-5">
+    <div class="container">
+        <h1 class="display-4 fw-bold text-primary mb-4">
+            <i class="fas fa-chart-line me-3"></i>
+            Business Analytics Dashboard
+        </h1>
+        <p class="lead mb-4">
+            Comprehensive Python-based business analytics solution for stock market data analysis and reporting
+        </p>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <p class="mb-4">
+                    Transform your financial data into actionable insights with our powerful analytics engine. 
+                    Get detailed reports, interactive charts, and professional Excel exports.
+                </p>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="{{ url_for('dashboard') }}" class="btn btn-primary btn-lg">
+                <i class="fas fa-chart-bar me-2"></i>
+                View Dashboard
+            </a>
+            <a href="{{ url_for('documentation') }}" class="btn btn-outline-primary btn-lg">
+                <i class="fas fa-book me-2"></i>
+                User Guide
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="features-section py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">
+            <i class="fas fa-star me-2"></i>
+            Key Features
+        </h2>
+        
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm hover-card">
+                    <div class="card-body text-center">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-chart-line fa-3x text-primary"></i>
+                        </div>
+                        <h5 class="card-title">8 Analytics Modules</h5>
+                        <p class="card-text">
+                            Comprehensive analysis including descriptive, performance, technical, risk, 
+                            time series, volatility, predictive, and trading strategy analytics.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm hover-card">
+                    <div class="card-body text-center">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-file-excel fa-3x text-success"></i>
+                        </div>
+                        <h5 class="card-title">Professional Reports</h5>
+                        <p class="card-text">
+                            Generate beautifully formatted Excel reports with color coding, 
+                            conditional formatting, and professional styling.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm hover-card">
+                    <div class="card-body text-center">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-chart-area fa-3x text-warning"></i>
+                        </div>
+                        <h5 class="card-title">Interactive Charts</h5>
+                        <p class="card-text">
+                            High-resolution visualizations with multiple chart types, 
+                            professional styling, and interactive features.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row g-4 mt-2">
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm hover-card">
+                    <div class="card-body text-center">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-tachometer-alt fa-3x text-info"></i>
+                        </div>
+                        <h5 class="card-title">Real-time Analysis</h5>
+                        <p class="card-text">
+                            Process your data instantly with optimized algorithms 
+                            and get results in seconds, not minutes.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm hover-card">
+                    <div class="card-body text-center">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-shield-alt fa-3x text-danger"></i>
+                        </div>
+                        <h5 class="card-title">Risk Management</h5>
+                        <p class="card-text">
+                            Advanced risk metrics including Value at Risk, 
+                            maximum drawdown, and Sharpe ratio calculations.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm hover-card">
+                    <div class="card-body text-center">
+                        <div class="feature-icon mb-3">
+                            <i class="fas fa-code fa-3x text-secondary"></i>
+                        </div>
+                        <h5 class="card-title">Professional Solution</h5>
+                        <p class="card-text">
+                            Enterprise-grade analytics platform with comprehensive reporting 
+                            and professional visualization capabilities.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Analytics Overview Section -->
+<div class="analytics-overview py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">
+            <i class="fas fa-analytics me-2"></i>
+            Analytics Capabilities
+        </h2>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="analytics-item mb-4">
+                    <h5><i class="fas fa-chart-bar text-primary me-2"></i>Descriptive Analytics</h5>
+                    <p>Basic statistics, data overview, price ranges, and volume analysis</p>
+                </div>
+                
+                <div class="analytics-item mb-4">
+                    <h5><i class="fas fa-percentage text-success me-2"></i>Performance Analytics</h5>
+                    <p>Returns calculation, volatility metrics, and cumulative performance tracking</p>
+                </div>
+                
+                <div class="analytics-item mb-4">
+                    <h5><i class="fas fa-chart-line text-warning me-2"></i>Technical Analytics</h5>
+                    <p>Moving averages, RSI indicators, and trading signal generation</p>
+                </div>
+                
+                <div class="analytics-item mb-4">
+                    <h5><i class="fas fa-exclamation-triangle text-danger me-2"></i>Risk Analytics</h5>
+                    <p>Value at Risk, maximum drawdown, and Sharpe ratio analysis</p>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="analytics-item mb-4">
+                    <h5><i class="fas fa-calendar text-info me-2"></i>Time Series Analytics</h5>
+                    <p>Seasonality patterns, monthly analysis, and trend identification</p>
+                </div>
+                
+                <div class="analytics-item mb-4">
+                    <h5><i class="fas fa-wave-square text-secondary me-2"></i>Volatility Analytics</h5>
+                    <p>Volatility clustering, market conditions, and volatility patterns</p>
+                </div>
+                
+                <div class="analytics-item mb-4">
+                    <h5><i class="fas fa-crystal-ball text-primary me-2"></i>Predictive Analytics</h5>
+                    <p>Moving average crossovers, trend predictions, and signal analysis</p>
+                </div>
+                
+                <div class="analytics-item mb-4">
+                    <h5><i class="fas fa-chess text-success me-2"></i>Trading Strategy Analytics</h5>
+                    <p>Strategy backtesting, performance comparison, and optimization</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Technology Stack Section -->
+<div class="tech-stack py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">
+            <i class="fas fa-cogs me-2"></i>
+            Platform Capabilities
+        </h2>
+        
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="row g-3">
+                    <div class="col-6 col-md-3">
+                        <div class="tech-item text-center">
+                            <i class="fas fa-chart-line fa-3x text-primary mb-2"></i>
+                            <p class="mb-0">Advanced Analytics</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="tech-item text-center">
+                            <i class="fas fa-database fa-3x text-success mb-2"></i>
+                            <p class="mb-0">Data Processing</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="tech-item text-center">
+                            <i class="fas fa-chart-area fa-3x text-warning mb-2"></i>
+                            <p class="mb-0">Visualization</p>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <div class="tech-item text-center">
+                            <i class="fas fa-shield-alt fa-3x text-info mb-2"></i>
+                            <p class="mb-0">Secure Platform</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CTA Section -->
+<div class="cta-section py-5 bg-primary text-white text-center">
+    <div class="container">
+        <h2 class="mb-4">Ready to Analyze Your Data?</h2>
+        <p class="lead mb-4">
+            Start exploring your financial data with our comprehensive analytics dashboard
+        </p>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-light btn-lg">
+            <i class="fas fa-rocket me-2"></i>
+            Launch Dashboard
+        </a>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Add smooth scrolling and animations
+document.addEventListener('DOMContentLoaded', function() {
+    // Add hover effects to cards
+    const cards = document.querySelectorAll('.hover-card');
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.classList.add('shadow-lg');
+            this.style.transform = 'translateY(-5px)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+            this.classList.remove('shadow-lg');
+            this.style.transform = 'translateY(0)';
+        });
+    });
+});
+</script>
+{% endblock %}

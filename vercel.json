@@ -1,0 +1,1 @@
+{"version": 2, "name": "business-analytics-dashboard", "builds": [{"src": "app.py", "use": "@vercel/python"}], "routes": [{"src": "/(.*)", "dest": "app.py"}], "env": {"PYTHON_VERSION": "3.9"}, "functions": {"app.py": {"runtime": "python3.9"}}}
