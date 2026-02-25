@@ -1,0 +1,353 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "business-analytics-dashboard"
+version = "1.0.0"
+description = "Comprehensive Python-based business analytics solution for stock market data"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "Business Analytics Team", email = "analytics@company.com"}
+]
+maintainers = [
+    {name = "Business Analytics Team", email = "analytics@company.com"}
+]
+keywords = [
+    "business analytics",
+    "stock market",
+    "financial analysis",
+    "reporting",
+    "excel",
+    "charts",
+    "technical analysis",
+    "risk management"
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Financial and Insurance Industry",
+    "Intended Audience :: Developers",
+    "Topic :: Office/Business :: Financial :: Investment",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+    "Environment :: Console",
+    "Environment :: Web Environment"
+]
+requires-python = ">=3.9"
+dependencies = [
+    "pandas>=2.3.3",
+    "numpy>=2.0.2",
+    "matplotlib>=3.9.4",
+    "seaborn>=0.13.0",
+    "openpyxl>=3.1.5",
+    "xlrd>=2.0.1",
+    "python-dateutil>=2.9.0.post0",
+    "scipy>=1.13.0",
+    "scikit-learn>=1.5.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=24.0.0",
+    "flake8>=7.0.0",
+    "mypy>=1.0.0",
+    "pre-commit>=3.0.0",
+    "isort>=5.12.0"
+]
+docs = [
+    "sphinx>=7.0.0",
+    "sphinx-rtd-theme>=1.3.0",
+    "myst-parser>=2.0.0"
+]
+performance = [
+    "memory-profiler>=0.61.0",
+    "line-profiler>=4.1.0",
+    "psutil>=5.9.0"
+]
+security = [
+    "safety>=2.3.0",
+    "bandit>=1.7.0",
+    "pip-audit>=2.6.0"
+]
+all = [
+    "business-analytics-dashboard[dev,docs,performance,security]"
+]
+
+[project.urls]
+Homepage = "https://github.com/company/business-analytics-dashboard"
+Documentation = "https://github.com/company/business-analytics-dashboard/wiki"
+Repository = "https://github.com/company/business-analytics-dashboard.git"
+"Bug Tracker" = "https://github.com/company/business-analytics-dashboard/issues"
+Changelog = "https://github.com/company/business-analytics-dashboard/blob/main/CHANGELOG.md"
+
+[project.scripts]
+business-analytics = "comprehensive_analytics:main"
+generate-reports = "generate_reports:main"
+excel-reports = "generate_excel_reports:main"
+analytics-config = "config:main"
+
+[tool.setuptools]
+packages = ["src"]
+
+[tool.setuptools.package-data]
+"*" = ["*.xlsx", "*.csv", "*.md", "*.txt", "*.png", "*.jpg"]
+
+[tool.black]
+line-length = 100
+target-version = ['py39', 'py310', 'py311']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 100
+known_first_party = ["src"]
+
+[tool.flake8]
+max-line-length = 100
+extend-ignore = ["E203", "W503", "E501"]
+exclude = [
+    ".git",
+    "__pycache__",
+    "build",
+    "dist",
+    ".venv",
+    ".eggs",
+    "*.egg-info"
+]
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[[tool.mypy.overrides]]
+module = [
+    "matplotlib.*",
+    "seaborn.*",
+    "openpyxl.*",
+    "xlrd.*"
+]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q --strict-markers --strict-config"
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "unit: marks tests as unit tests",
+    "performance: marks tests as performance tests"
+]
+filterwarnings = [
+    "error",
+    "ignore::UserWarning",
+    "ignore::DeprecationWarning",
+    "ignore::PendingDeprecationWarning"
+]
+
+[tool.coverage.run]
+source = ["src"]
+omit = [
+    "*/tests/*",
+    "*/test_*",
+    "*/__pycache__/*",
+    "*/site-packages/*"
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:"
+]
+show_missing = true
+precision = 2
+
+[tool.coverage.html]
+directory = "htmlcov"
+
+[tool.bandit]
+exclude_dirs = ["tests", "test_*"]
+skips = ["B101", "B601"]
+
+[tool.memory-profiler]
+precision = 4
+
+[tool.line_profiler]
+verbose = true
+
+[tool.pylint.messages_control]
+disable = [
+    "missing-docstring",
+    "invalid-name",
+    "line-too-long",
+    "too-many-locals",
+    "too-many-arguments"
+]
+
+[tool.pylint.format]
+max-line-length = 100
+
+[tool.bandit.assert_used]
+skips = ["*_test.py", "test_*.py"]
+
+[tool.bandit.calls]
+blacklist_calls = ["input", "eval"]
+
+[tool.bandit.imports]
+blacklist_imports = ["pickle", "subprocess", "os.system"]
+
+[tool.bandit.secrets]
+exclude_dirs = ["tests", "test_*"]
+
+[tool.check-manifest]
+ignore = [
+    ".gitignore",
+    ".travis.yml",
+    "CONTRIBUTING.md",
+    "LICENSE",
+    "Makefile",
+    "README.md",
+    "requirements*.txt",
+    "setup.cfg",
+    "tox.ini"
+]
+
+[tool.bumpversion]
+current_version = "1.0.0"
+commit = true
+tag = true
+message = "Bump version: {current_version} → {new_version}"
+
+[[tool.bumpversion.files]]
+filename = "pyproject.toml"
+search = "version = \"{current_version}\""
+replace = "version = \"{new_version}\""
+
+[[tool.bumpversion.files]]
+filename = "setup.py"
+search = "version=\"{current_version}\""
+replace = "version=\"{new_version}\""
+
+[tool.semantic_release]
+version_variable = [
+    "pyproject.toml:version",
+    "setup.py:version"
+]
+branch = "main"
+build_command = "python -m build"
+
+[tool.hatch]
+build.targets.sdist.include = [
+    "/src",
+    "/tests",
+    "/docs",
+    "/requirements*.txt",
+    "/README.md",
+    "/LICENSE",
+    "/CHANGELOG.md"
+]
+
+[tool.hatch.envs.default]
+dependencies = [
+    "coverage[toml]>=6.5",
+    "pytest",
+    "pytest-cov",
+    "pytest-mock",
+    "black",
+    "flake8",
+    "mypy"
+]
+
+[tool.hatch.envs.default.scripts]
+test = "pytest {args:tests}"
+test-cov = "pytest --cov=src --cov-report=html {args:tests}"
+cov = "coverage html"
+lint = [
+    "black --check --diff .",
+    "flake8 .",
+    "mypy ."
+]
+format = [
+    "black .",
+    "isort ."
+]
+
+[tool.hatch.envs.docs]
+dependencies = [
+    "sphinx",
+    "sphinx-rtd-theme",
+    "myst-parser"
+]
+
+[tool.hatch.envs.docs.scripts]
+build = "sphinx-build docs docs/_build"
+serve = "python -m http.server --directory docs/_build/html"
+
+[tool.hatch.envs.performance]
+dependencies = [
+    "memory-profiler",
+    "line-profiler",
+    "psutil",
+    "pytest-benchmark"
+]
+
+[tool.hatch.envs.performance.scripts]
+profile = "python -m memory_profiler comprehensive_analytics.py"
+benchmark = "pytest --benchmark-only {args:tests}"
+
+[tool.hatch.envs.security]
+dependencies = [
+    "safety",
+    "bandit",
+    "pip-audit"
+]
+
+[tool.hatch.envs.security.scripts]
+check = [
+    "safety check",
+    "bandit -r .",
+    "pip-audit"
+]
