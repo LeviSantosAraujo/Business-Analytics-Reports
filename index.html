@@ -321,6 +321,36 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="chart-container">
+                        <h4>Descriptive Analytics</h4>
+                        <canvas id="descriptiveChart" height="100"></canvas>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="chart-container">
+                        <h4>Time Series Analysis</h4>
+                        <canvas id="timeSeriesChart" height="100"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="chart-container">
+                        <h4>Technical Analysis</h4>
+                        <canvas id="technicalChart" height="100"></canvas>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="chart-container">
+                        <h4>Predictive Analytics</h4>
+                        <canvas id="predictiveChart" height="100"></canvas>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -603,6 +633,248 @@
                             r: {
                                 beginAtZero: true,
                                 max: 100
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Descriptive Analytics Chart
+            const descriptiveCtx = document.getElementById('descriptiveChart');
+            if (descriptiveCtx) {
+                new Chart(descriptiveCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Mean', 'Median', 'Std Dev', 'Min', 'Max', 'Q1', 'Q3'],
+                        datasets: [{
+                            label: 'Statistical Measures',
+                            data: [125.50, 122.30, 15.75, 95.20, 165.80, 110.40, 140.60],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.5)',
+                                'rgba(54, 162, 235, 0.5)',
+                                'rgba(255, 206, 86, 0.5)',
+                                'rgba(75, 192, 192, 0.5)',
+                                'rgba(153, 102, 255, 0.5)',
+                                'rgba(255, 159, 64, 0.5)',
+                                'rgba(199, 199, 199, 0.5)'
+                            ],
+                            borderColor: [
+                                'rgb(255, 99, 132)',
+                                'rgb(54, 162, 235)',
+                                'rgb(255, 206, 86)',
+                                'rgb(75, 192, 192)',
+                                'rgb(153, 102, 255)',
+                                'rgb(255, 159, 64)',
+                                'rgb(199, 199, 199)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Price ($)'
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    maxRotation: 45,
+                                    minRotation: 45
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Time Series Analysis Chart
+            const timeSeriesCtx = document.getElementById('timeSeriesChart');
+            if (timeSeriesCtx) {
+                new Chart(timeSeriesCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Week 6', 'Week 7', 'Week 8'],
+                        datasets: [{
+                            label: 'Actual',
+                            data: [120, 125, 122, 130, 135, 132, 140, 138],
+                            borderColor: 'rgb(75, 192, 192)',
+                            backgroundColor: 'rgba(75, 192, 192, 0.1)',
+                            tension: 0.1
+                        }, {
+                            label: 'Trend',
+                            data: [118, 121, 124, 127, 130, 133, 136, 139],
+                            borderColor: 'rgb(255, 99, 132)',
+                            backgroundColor: 'rgba(255, 99, 132, 0.1)',
+                            borderDash: [5, 5],
+                            tension: 0.1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'top'
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: false,
+                                title: {
+                                    display: true,
+                                    text: 'Price ($)'
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    maxRotation: 45,
+                                    minRotation: 45
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Technical Analysis Chart
+            const technicalCtx = document.getElementById('technicalChart');
+            if (technicalCtx) {
+                new Chart(technicalCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7', 'Day 8', 'Day 9', 'Day 10'],
+                        datasets: [{
+                            label: 'Price',
+                            data: [120, 122, 125, 123, 128, 130, 127, 132, 135, 133],
+                            borderColor: 'rgb(75, 192, 192)',
+                            backgroundColor: 'rgba(75, 192, 192, 0.1)',
+                            tension: 0.1
+                        }, {
+                            label: 'MA 20',
+                            data: [null, null, null, null, 125, 126, 127, 128, 129, 130],
+                            borderColor: 'rgb(255, 206, 86)',
+                            backgroundColor: 'rgba(255, 206, 86, 0.1)',
+                            borderDash: [5, 5],
+                            tension: 0.1
+                        }, {
+                            label: 'RSI',
+                            data: [45, 52, 58, 55, 62, 68, 65, 70, 72, 68],
+                            borderColor: 'rgb(255, 99, 132)',
+                            backgroundColor: 'rgba(255, 99, 132, 0.1)',
+                            yAxisID: 'y1',
+                            tension: 0.1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'top'
+                            }
+                        },
+                        scales: {
+                            y: {
+                                type: 'linear',
+                                display: true,
+                                position: 'left',
+                                title: {
+                                    display: true,
+                                    text: 'Price ($)'
+                                }
+                            },
+                            y1: {
+                                type: 'linear',
+                                display: true,
+                                position: 'right',
+                                min: 0,
+                                max: 100,
+                                title: {
+                                    display: true,
+                                    text: 'RSI'
+                                },
+                                grid: {
+                                    drawOnChartArea: false
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    maxRotation: 45,
+                                    minRotation: 45
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Predictive Analytics Chart
+            const predictiveCtx = document.getElementById('predictiveChart');
+            if (predictiveCtx) {
+                new Chart(predictiveCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                        datasets: [{
+                            label: 'Historical',
+                            data: [120, 125, 122, 130, 135, 132, 140, 138, null, null, null, null],
+                            borderColor: 'rgb(75, 192, 192)',
+                            backgroundColor: 'rgba(75, 192, 192, 0.1)',
+                            tension: 0.1
+                        }, {
+                            label: 'Forecast',
+                            data: [null, null, null, null, null, null, null, 138, 142, 145, 148, 152],
+                            borderColor: 'rgb(255, 99, 132)',
+                            backgroundColor: 'rgba(255, 99, 132, 0.1)',
+                            borderDash: [5, 5],
+                            tension: 0.1
+                        }, {
+                            label: 'Upper Bound',
+                            data: [null, null, null, null, null, null, null, 138, 148, 152, 156, 160],
+                            borderColor: 'rgba(255, 206, 86, 0.5)',
+                            backgroundColor: 'rgba(255, 206, 86, 0.1)',
+                            borderDash: [2, 2],
+                            tension: 0.1,
+                            fill: '+1'
+                        }, {
+                            label: 'Lower Bound',
+                            data: [null, null, null, null, null, null, null, 138, 136, 138, 140, 144],
+                            borderColor: 'rgba(255, 206, 86, 0.5)',
+                            backgroundColor: 'rgba(255, 206, 86, 0.1)',
+                            borderDash: [2, 2],
+                            tension: 0.1,
+                            fill: '-1'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'top'
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: false,
+                                title: {
+                                    display: true,
+                                    text: 'Price ($)'
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    maxRotation: 45,
+                                    minRotation: 45
+                                }
                             }
                         }
                     }
