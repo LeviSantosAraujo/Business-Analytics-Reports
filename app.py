@@ -350,12 +350,16 @@ def not_found(error):
 def internal_error(error):
     return render_template('500.html'), 500
 
+# Vercel serverless handler
+def handler(event, context):
+    return app(event, context)
+
 if __name__ == '__main__':
     # Create templates directory if it doesn't exist
     if not os.path.exists('templates'):
         os.makedirs('templates')
     
-    # Create static directory if it doesn't exist
+    # Local development setup
     if not os.path.exists('static'):
         os.makedirs('static')
         os.makedirs('static/css')
