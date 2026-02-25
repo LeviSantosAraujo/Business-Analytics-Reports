@@ -456,6 +456,11 @@
             
             // Initialize charts when dashboard is shown
             if (sectionId === 'dashboard') {
+                // Clear any existing charts
+                Chart.helpers.each(Chart.instances, function(instance) {
+                    instance.destroy();
+                });
+                // Initialize new charts
                 setTimeout(initCharts, 100);
             }
         }
@@ -465,75 +470,126 @@
             const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
             
             // Price Chart
-            new Chart(document.getElementById('priceChart'), {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Price',
-                        data: [100, 120, 115, 130, 145, 140, 160, 155, 170, 165, 180, 175],
-                        borderColor: 'rgb(75, 192, 192)',
-                        tension: 0.1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: { display: false }
+            const priceCtx = document.getElementById('priceChart');
+            if (priceCtx) {
+                new Chart(priceCtx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Price',
+                            data: [100, 120, 115, 130, 145, 140, 160, 155, 170, 165, 180, 175],
+                            borderColor: 'rgb(75, 192, 192)',
+                            backgroundColor: 'rgba(75, 192, 192, 0.1)',
+                            tension: 0.1,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: false
+                            }
+                        }
                     }
-                }
-            });
+                });
+            }
 
             // Performance Chart
-            new Chart(document.getElementById('performanceChart'), {
-                type: 'doughnut',
-                data: {
-                    labels: ['Positive', 'Negative', 'Neutral'],
-                    datasets: [{
-                        data: [65, 20, 15],
-                        backgroundColor: ['#28a745', '#dc3545', '#ffc107']
-                    }]
-                },
-                options: {
-                    responsive: true
-                }
-            });
+            const performanceCtx = document.getElementById('performanceChart');
+            if (performanceCtx) {
+                new Chart(performanceCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Positive', 'Negative', 'Neutral'],
+                        datasets: [{
+                            data: [65, 20, 15],
+                            backgroundColor: ['#28a745', '#dc3545', '#ffc107'],
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            }
+                        }
+                    }
+                });
+            }
 
             // Volume Chart
-            new Chart(document.getElementById('volumeChart'), {
-                type: 'bar',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Volume',
-                        data: [1200000, 1500000, 1300000, 1700000, 1600000, 1400000, 1800000, 1750000, 1900000, 1850000, 2000000, 1950000],
-                        backgroundColor: 'rgba(54, 162, 235, 0.5)'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: { display: false }
+            const volumeCtx = document.getElementById('volumeChart');
+            if (volumeCtx) {
+                new Chart(volumeCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Volume',
+                            data: [1200000, 1500000, 1300000, 1700000, 1600000, 1400000, 1800000, 1750000, 1900000, 1850000, 2000000, 1950000],
+                            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return (value / 1000000).toFixed(1) + 'M';
+                                    }
+                                }
+                            }
+                        }
                     }
-                }
-            });
+                });
+            }
 
             // Risk Chart
-            new Chart(document.getElementById('riskChart'), {
-                type: 'radar',
-                data: {
-                    labels: ['Volatility', 'Risk', 'Return', 'Stability', 'Growth'],
-                    datasets: [{
-                        label: 'Current',
-                        data: [65, 70, 80, 75, 85],
-                        borderColor: 'rgb(255, 99, 132)',
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)'
-                    }]
-                },
-                options: {
-                    responsive: true
-                }
-            });
+            const riskCtx = document.getElementById('riskChart');
+            if (riskCtx) {
+                new Chart(riskCtx, {
+                    type: 'radar',
+                    data: {
+                        labels: ['Volatility', 'Risk', 'Return', 'Stability', 'Growth'],
+                        datasets: [{
+                            label: 'Current',
+                            data: [65, 70, 80, 75, 85],
+                            borderColor: 'rgb(255, 99, 132)',
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            pointBackgroundColor: 'rgb(255, 99, 132)',
+                            pointBorderColor: '#fff',
+                            pointHoverBackgroundColor: '#fff',
+                            pointHoverBorderColor: 'rgb(255, 99, 132)'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            r: {
+                                beginAtZero: true,
+                                max: 100
+                            }
+                        }
+                    }
+                });
+            }
         }
 
         // Set home as default active nav
