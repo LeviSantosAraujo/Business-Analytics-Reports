@@ -39,6 +39,12 @@
             padding: 20px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             margin: 20px 0;
+            height: 400px;
+            position: relative;
+        }
+        .chart-container canvas {
+            max-height: 350px !important;
+            width: 100% !important;
         }
         .feature-card {
             background: white;
@@ -494,6 +500,12 @@
                         scales: {
                             y: {
                                 beginAtZero: false
+                            },
+                            x: {
+                                ticks: {
+                                    maxRotation: 45,
+                                    minRotation: 45
+                                }
                             }
                         }
                     }
@@ -553,6 +565,12 @@
                                     callback: function(value) {
                                         return (value / 1000000).toFixed(1) + 'M';
                                     }
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    maxRotation: 45,
+                                    minRotation: 45
                                 }
                             }
                         }
