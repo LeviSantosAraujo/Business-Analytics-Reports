@@ -1,1 +1,1 @@
-{"version": 2, "routes": [{"src": "/index.html", "dest": "/index.html"}, {"src": "/dashboard", "dest": "/dashboard.html"}, {"src": "/about", "dest": "/about.html"}, {"src": "/documentation", "dest": "/documentation.html"}, {"src": "/(.*)", "dest": "/index.html"}]}
+{"version": 2, "routes": [{"src": "/(.*)", "dest": "/index.html"}]}

@@ -6,6 +6,7 @@
     <title>Business Analytics Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .hero-section {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -18,6 +19,54 @@
             padding: 20px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             margin: 10px 0;
+            transition: transform 0.2s;
+        }
+        .metric-card:hover {
+            transform: translateY(-2px);
+        }
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .metric-label {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        .chart-container {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin: 20px 0;
+            transition: transform 0.2s;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        .doc-section {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        .section {
+            display: none;
+        }
+        .section.active {
+            display: block;
         }
     </style>
 </head>
@@ -25,50 +74,51 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="/">
+            <a class="navbar-brand" href="#" onclick="showSection('home')">
                 <i class="fas fa-chart-line me-2"></i>
                 Business Analytics Dashboard
             </a>
             <div class="navbar-nav ms-auto">
-                <a class="nav-link" href="/">Home</a>
-                <a class="nav-link" href="/dashboard">Dashboard</a>
-                <a class="nav-link" href="/about">About</a>
-                <a class="nav-link" href="/documentation">Documentation</a>
+                <a class="nav-link" href="#" onclick="showSection('home')">Home</a>
+                <a class="nav-link" href="#" onclick="showSection('dashboard')">Dashboard</a>
+                <a class="nav-link" href="#" onclick="showSection('about')">About</a>
+                <a class="nav-link" href="#" onclick="showSection('documentation')">Documentation</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero-section text-center">
-        <div class="container">
-            <h1 class="display-4 fw-bold mb-4">Business Analytics Dashboard</h1>
-            <p class="lead mb-4">Professional analytics solution for business insights</p>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="metric-card">
-                        <h3><i class="fas fa-chart-bar text-primary"></i> Analytics</h3>
-                        <p>Comprehensive data analysis and reporting</p>
+    <!-- Home Section -->
+    <section id="home" class="section active">
+        <!-- Hero Section -->
+        <div class="hero-section text-center">
+            <div class="container">
+                <h1 class="display-4 fw-bold mb-4">Business Analytics Dashboard</h1>
+                <p class="lead mb-4">Professional analytics solution for business insights</p>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="metric-card">
+                            <h3><i class="fas fa-chart-bar text-primary"></i> Analytics</h3>
+                            <p>Comprehensive data analysis and reporting</p>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="metric-card">
-                        <h3><i class="fas fa-chart-line text-success"></i> Insights</h3>
-                        <p>Real-time business intelligence</p>
+                    <div class="col-md-4">
+                        <div class="metric-card">
+                            <h3><i class="fas fa-chart-line text-success"></i> Insights</h3>
+                            <p>Real-time business intelligence</p>
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="metric-card">
-                        <h3><i class="fas fa-chart-pie text-info"></i> Reports</h3>
-                        <p>Professional reporting solutions</p>
+                    <div class="col-md-4">
+                        <div class="metric-card">
+                            <h3><i class="fas fa-chart-pie text-info"></i> Reports</h3>
+                            <p>Professional reporting solutions</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Features Section -->
-    <section class="py-5">
-        <div class="container">
+        <!-- Features Section -->
+        <div class="container py-5">
             <h2 class="text-center mb-4">Platform Features</h2>
             <div class="row">
                 <div class="col-md-6">
@@ -83,6 +133,199 @@
         </div>
     </section>
 
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="section">
+        <!-- Dashboard Header -->
+        <div class="container-fluid bg-primary text-white py-4">
+            <div class="container">
+                <h1 class="display-6 fw-bold">Analytics Dashboard</h1>
+                <p class="lead mb-0">Real-time business insights and performance metrics</p>
+            </div>
+        </div>
+
+        <!-- Key Metrics -->
+        <div class="container py-4">
+            <h2 class="mb-4">Key Performance Metrics</h2>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="metric-card text-center">
+                        <i class="fas fa-chart-line text-success fa-2x mb-3"></i>
+                        <div class="metric-value">3,647%</div>
+                        <div class="metric-label">Total Return</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="metric-card text-center">
+                        <i class="fas fa-percentage text-info fa-2x mb-3"></i>
+                        <div class="metric-value">8.72%</div>
+                        <div class="metric-label">Annual Return</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="metric-card text-center">
+                        <i class="fas fa-chart-bar text-warning fa-2x mb-3"></i>
+                        <div class="metric-value">24.5%</div>
+                        <div class="metric-label">Volatility</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="metric-card text-center">
+                        <i class="fas fa-signal text-success fa-2x mb-3"></i>
+                        <div class="metric-value">Bullish</div>
+                        <div class="metric-label">Current Signal</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="container py-4">
+            <h2 class="mb-4">Analytics Overview</h2>
+            
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="chart-container">
+                        <h4>Price Performance</h4>
+                        <canvas id="priceChart" height="100"></canvas>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="chart-container">
+                        <h4>Performance Distribution</h4>
+                        <canvas id="performanceChart" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="chart-container">
+                        <h4>Volume Analysis</h4>
+                        <canvas id="volumeChart" height="100"></canvas>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="chart-container">
+                        <h4>Risk Metrics</h4>
+                        <canvas id="riskChart" height="100"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <!-- Hero Section -->
+        <div class="hero-section text-center">
+            <div class="container">
+                <h1 class="display-4 fw-bold mb-4">About Business Analytics Dashboard</h1>
+                <p class="lead mb-4">Professional analytics solution for comprehensive business insights</p>
+            </div>
+        </div>
+
+        <!-- About Content -->
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-8 mx-auto text-center">
+                    <h2 class="mb-4">Our Mission</h2>
+                    <p class="lead">To provide businesses with powerful, accessible analytics tools that transform raw data into actionable insights, enabling informed decision-making and strategic growth.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Platform Features -->
+        <div class="container py-4">
+            <h2 class="text-center mb-5">Platform Features</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon text-primary">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <h4>Advanced Analytics</h4>
+                        <p>Comprehensive data processing and analysis capabilities with sophisticated algorithms and statistical methods.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon text-success">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h4>Data Processing</h4>
+                        <p>Efficient handling of large datasets with automated cleaning, transformation, and preparation for analysis.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card text-center">
+                        <div class="feature-icon text-info">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4>Visualization</h4>
+                        <p>Interactive charts and visual representations that make complex data easy to understand and explore.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentation Section -->
+    <section id="documentation" class="section">
+        <!-- Documentation Header -->
+        <div class="container-fluid bg-primary text-white py-4">
+            <div class="container">
+                <h1 class="display-6 fw-bold">User Guide</h1>
+                <p class="lead mb-0">Complete documentation for the Business Analytics Dashboard</p>
+            </div>
+        </div>
+
+        <!-- Documentation Content -->
+        <div class="container py-4">
+            <div class="doc-section">
+                <h2><i class="fas fa-rocket me-2"></i>Getting Started</h2>
+                
+                <h4>Getting Started Guide</h4>
+                <ol>
+                    <li>Visit the dashboard homepage</li>
+                    <li>Navigate to the analytics dashboard</li>
+                    <li>Explore the available analytics modules</li>
+                    <li>Review key performance metrics</li>
+                    <li>Generate reports and export results</li>
+                </ol>
+
+                <h4 class="mt-4">System Requirements</h4>
+                <ul>
+                    <li>Modern web browser (Chrome, Firefox, Safari, Edge)</li>
+                    <li>Internet connection for real-time features</li>
+                    <li>JavaScript enabled for interactive charts</li>
+                    <li>Minimum screen resolution: 1024x768</li>
+                </ul>
+            </div>
+
+            <div class="doc-section">
+                <h2><i class="fas fa-tachometer-alt me-2"></i>Dashboard Guide</h2>
+                
+                <h4>Key Performance Metrics</h4>
+                <p>The dashboard displays essential business metrics at a glance:</p>
+                <ul>
+                    <li><strong>Total Return:</strong> Overall performance percentage</li>
+                    <li><strong>Annual Return:</strong> Year-over-year performance</li>
+                    <li><strong>Volatility:</strong> Risk assessment metric</li>
+                    <li><strong>Current Signal:</strong> Market/ business indicator</li>
+                </ul>
+
+                <h4 class="mt-4">Interactive Charts</h4>
+                <p>The dashboard features multiple interactive charts:</p>
+                <ul>
+                    <li><strong>Price Performance:</strong> Historical performance trends</li>
+                    <li><strong>Volume Analysis:</strong> Activity and volume metrics</li>
+                    <li><strong>Risk Metrics:</strong> Multi-dimensional risk assessment</li>
+                    <li><strong>Performance Distribution:</strong> Performance breakdown</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="bg-dark text-light py-4 mt-5">
         <div class="container text-center">
@@ -91,5 +334,108 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Initialize charts when dashboard is shown
+            if (sectionId === 'dashboard') {
+                setTimeout(initCharts, 100);
+            }
+        }
+
+        function initCharts() {
+            // Sample data for charts
+            const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            
+            // Price Chart
+            new Chart(document.getElementById('priceChart'), {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Price',
+                        data: [100, 120, 115, 130, 145, 140, 160, 155, 170, 165, 180, 175],
+                        borderColor: 'rgb(75, 192, 192)',
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+
+            // Performance Chart
+            new Chart(document.getElementById('performanceChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Positive', 'Negative', 'Neutral'],
+                    datasets: [{
+                        data: [65, 20, 15],
+                        backgroundColor: ['#28a745', '#dc3545', '#ffc107']
+                    }]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+
+            // Volume Chart
+            new Chart(document.getElementById('volumeChart'), {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Volume',
+                        data: [1200000, 1500000, 1300000, 1700000, 1600000, 1400000, 1800000, 1750000, 1900000, 1850000, 2000000, 1950000],
+                        backgroundColor: 'rgba(54, 162, 235, 0.5)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+
+            // Risk Chart
+            new Chart(document.getElementById('riskChart'), {
+                type: 'radar',
+                data: {
+                    labels: ['Volatility', 'Risk', 'Return', 'Stability', 'Growth'],
+                    datasets: [{
+                        label: 'Current',
+                        data: [65, 70, 80, 75, 85],
+                        borderColor: 'rgb(255, 99, 132)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)'
+                    }]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+        }
+
+        // Set home as default active nav
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('.nav-link').classList.add('active');
+        });
+    </script>
 </body>
 </html>
