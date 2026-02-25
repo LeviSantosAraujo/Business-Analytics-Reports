@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Business Analytics Dashboard</title>
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
     <style>
+        /* Brazil/Regional Access Fix */
+        @import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;500;600;700&display=swap');
         .hero-section {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -441,74 +444,46 @@
                     <li>Minimum screen resolution: 1024x768</li>
                 </ul>
             </div>
-
-            <div class="doc-section">
-                <h2><i class="fas fa-tachometer-alt me-2"></i>Dashboard Guide</h2>
-                
-                <h4>Key Performance Metrics</h4>
-                <p>The dashboard displays essential business metrics at a glance:</p>
-                <ul>
-                    <li><strong>Total Return:</strong> Overall performance percentage</li>
-                    <li><strong>Annual Return:</strong> Year-over-year performance</li>
-                    <li><strong>Volatility:</strong> Risk assessment metric</li>
-                    <li><strong>Current Signal:</strong> Market/ business indicator</li>
-                </ul>
-
-                <h4 class="mt-4">Interactive Charts</h4>
-                <p>The dashboard features multiple interactive charts:</p>
-                <ul>
-                    <li><strong>Price Performance:</strong> Historical performance trends</li>
-                    <li><strong>Volume Analysis:</strong> Activity and volume metrics</li>
-                    <li><strong>Risk Metrics:</strong> Multi-dimensional risk assessment</li>
-                    <li><strong>Performance Distribution:</strong> Performance breakdown</li>
-                </ul>
+        </div>
+        <div class="col-md-6">
+            <div class="chart-container">
+                <h4>Risk Metrics</h4>
+                <canvas id="riskChart" height="100"></canvas>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-light py-4 mt-5">
-        <div class="container text-center">
-            <p>&copy; 2025 Business Analytics Dashboard. Professional analytics solution for business insights.</p>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="chart-container">
+                <h4>Descriptive Analytics</h4>
+                <canvas id="descriptiveChart" height="100"></canvas>
+            </div>
         </div>
-    </footer>
+        <div class="col-md-6">
+            <div class="chart-container">
+                <h4>Time Series Analysis</h4>
+                <canvas id="timeSeriesChart" height="100"></canvas>
+            </div>
+        </div>
+    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        function showSection(sectionId) {
-            // Hide all sections
-            document.querySelectorAll('.section').forEach(section => {
-                section.classList.remove('active');
-            });
-            
-            // Show selected section
-            document.getElementById(sectionId).classList.add('active');
-            
-            // Update nav links
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            // Initialize charts when dashboard is shown
-            if (sectionId === 'dashboard') {
-                // Clear any existing charts
-                Chart.helpers.each(Chart.instances, function(instance) {
-                    instance.destroy();
-                });
-                // Initialize new charts
-                setTimeout(initCharts, 100);
-            }
-        }
-
-        function initCharts() {
-            // Sample data for charts
-            const labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-            
-            // Price Chart
-            const priceCtx = document.getElementById('priceChart');
-            if (priceCtx) {
-                new Chart(priceCtx, {
+    <div class="row">
+        <div class="col-md-6">
+            <div class="chart-container">
+                <h4>Technical Analysis</h4>
+                <canvas id="technicalChart" height="100"></canvas>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="chart-container">
+                <h4>Predictive Analytics</h4>
+                <canvas id="predictiveChart" height="100"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
                     type: 'line',
                     data: {
                         labels: labels,
