@@ -1,10 +1,10 @@
 # Business Analytics Dashboard
 
-A comprehensive Python-based business analytics solution for stock market data analysis and reporting.
+A comprehensive Python-based business analytics solution for stock market data analysis and reporting, featuring both console-based analytics and an interactive web dashboard.
 
 ## 📊 Project Overview
 
-This project provides 8 different types of business analytics for stock market data, with automated report generation in both Excel and text formats, plus professional visualizations.
+This project provides 12 different types of business analytics for stock market data, with automated report generation in both Excel and text formats, plus professional visualizations. It also includes a Flask-based web application with an interactive dashboard.
 
 ## 🚀 Features
 
@@ -17,26 +17,58 @@ This project provides 8 different types of business analytics for stock market d
 6. **Volatility Analytics** - Volatility patterns and clustering analysis
 7. **Predictive Analytics** - Moving average crossovers and trend predictions
 8. **Trading Strategy Analytics** - Strategy backtesting and performance comparison
+9. **Market Sentiment Analytics** - Volume-price relationship analysis
+10. **Market Regime Analytics** - Bull/bear market identification
+11. **Correlation Analytics** - Price-volume correlation analysis
+12. **Performance Benchmarking** - Market comparison and information ratio
+
+### Web Application Features
+- **Interactive Dashboard** - Real-time analytics visualization
+- **Multiple Pages** - Home, Dashboard, About, Documentation
+- **API Endpoints** - RESTful API for analytics data
+- **Vercel Deployment** - Serverless-ready for cloud deployment
+- **Responsive Design** - Modern, mobile-friendly interface
 
 ### Output Formats
 - **Excel Reports** - Professional formatted spreadsheets with color coding
 - **Text Reports** - Detailed analysis summaries
 - **Charts** - High-resolution PNG visualizations
 - **Summary Report** - Complete project overview
+- **Web Dashboard** - Interactive analytics display
 
 ## 📁 Project Structure
 
 ```
-Devices1/
+Business Analytics Reports/
 ├── README.md                          # This file
 ├── requirements.txt                   # Python dependencies
-├── setup.py                          # Project setup configuration
 ├── config.py                         # Configuration settings
-├── comprehensive_analytics.py        # Main analytics script (console output)
-├── generate_reports.py              # Text + Charts generator
-├── generate_excel_reports.py        # Excel reports generator
+├── app.py                             # Minimal Flask app (Vercel compatible)
+├── app_with_analytics.py              # Flask app with analytics integration
+├── comprehensive_analytics.py        # Main analytics script (12 modules, console output)
+├── generate_reports.py              # Text + Charts generator (8 modules)
+├── generate_excel_reports.py        # Excel reports generator (8 modules)
 ├── DevicesData.xlsx                  # Sample data file
+├── vercel.json                       # Vercel deployment configuration
+├── Makefile                          # Build automation
+├── templates/                        # HTML templates for web app
+│   ├── base.html
+│   ├── index.html
+│   ├── dashboard.html
+│   ├── about.html
+│   └── documentation.html
+├── static/                           # Static assets
+│   ├── css/
+│   └── js/
 ├── reports/                          # Generated reports directory
+│   ├── 01_descriptive_analytics.txt
+│   ├── 02_performance_analytics.txt
+│   ├── 03_technical_analytics.txt
+│   ├── 04_risk_analytics.txt
+│   ├── 05_time_series_analytics.txt
+│   ├── 06_volatility_analytics.txt
+│   ├── 07_predictive_analytics.txt
+│   ├── 08_trading_strategy_analytics.txt
 │   ├── 01_descriptive_analytics.xlsx
 │   ├── 02_performance_analytics.xlsx
 │   ├── 03_technical_analytics.xlsx
@@ -70,8 +102,8 @@ Devices1/
 1. **Clone or download the project**
    ```bash
    # If using git
-   git clone <repository-url>
-   cd Devices1
+   git clone https://github.com/LeviSantosAraujo/Business-Analytics-Reports.git
+   cd "Business Analytics Reports"
    ```
 
 2. **Create virtual environment**
@@ -94,19 +126,41 @@ Devices1/
 
 ### Quick Start
 
-1. **Run comprehensive analysis (console output)**
+#### Console-Based Analytics
+
+1. **Run comprehensive analysis (12 modules, console output)**
    ```bash
    python comprehensive_analytics.py
    ```
 
-2. **Generate text reports and charts**
+2. **Generate text reports and charts (8 modules)**
    ```bash
    python generate_reports.py
    ```
 
-3. **Generate Excel reports**
+3. **Generate Excel reports (8 modules)**
    ```bash
    python generate_excel_reports.py
+   ```
+
+#### Web Application
+
+1. **Run minimal Flask app**
+   ```bash
+   python app.py
+   ```
+   Access at: http://localhost:5000
+
+2. **Run Flask app with analytics integration**
+   ```bash
+   python app_with_analytics.py
+   ```
+   Access at: http://localhost:5000
+   Dashboard at: http://localhost:5000/dashboard
+
+3. **Deploy to Vercel**
+   ```bash
+   vercel deploy
    ```
 
 ### Data Format
@@ -119,9 +173,13 @@ The system expects stock data in Excel format with the following structure:
 ### Customization
 
 #### Change Data File
-Edit the data file path in any script:
+Edit the data file path in any script or use environment variables:
 ```python
+# In script
 df = load_data('your_data_file.xlsx')
+
+# Or via environment variable
+export DATA_FILE="your_data_file.xlsx"
 ```
 
 #### Modify Analytics
@@ -129,6 +187,13 @@ Each analytics function can be customized in the respective script:
 - Add new metrics
 - Modify calculations
 - Change visualization parameters
+
+#### Configuration
+Edit `config.py` to customize:
+- Analytics parameters (SMA periods, RSI windows, etc.)
+- Chart settings (DPI, style, colors)
+- Excel formatting (fonts, colors, borders)
+- Output directories
 
 #### Excel Styling
 Customize colors and formatting in `generate_excel_reports.py`:
@@ -179,6 +244,26 @@ title_fill = PatternFill(start_color='2F75B5', end_color='2F75B5', fill_type='so
 - **Metrics**: Strategy returns vs buy & hold
 - **Output**: Performance comparison + strategy charts
 
+### 9. Market Sentiment Analytics
+- **Purpose**: Volume-price relationship analysis
+- **Metrics**: Volume ratios, high-volume day returns, up/down volume
+- **Output**: Sentiment indicators (bullish/bearish/neutral)
+
+### 10. Market Regime Analytics
+- **Purpose**: Identify bull/bear market periods
+- **Metrics**: 200-day SMA analysis, regime percentages
+- **Output**: Current market regime identification
+
+### 11. Correlation Analytics
+- **Purpose**: Price-volume correlation analysis
+- **Metrics**: Price-volume correlation, autocorrelation, return patterns
+- **Output**: Correlation coefficients and relationship strength
+
+### 12. Performance Benchmarking
+- **Purpose**: Benchmark against hypothetical market
+- **Metrics**: Excess return, tracking error, information ratio
+- **Output**: Performance vs market comparison
+
 ## 🎨 Excel Report Features
 
 ### Professional Formatting
@@ -206,6 +291,8 @@ title_fill = PatternFill(start_color='2F75B5', end_color='2F75B5', fill_type='so
 ## 🔧 Configuration
 
 ### Settings File (`config.py`)
+The project uses a centralized configuration file (`config.py`) for all settings:
+
 ```python
 # Data settings
 DATA_FILE = 'DevicesData.xlsx'
@@ -213,18 +300,44 @@ OUTPUT_DIR = 'reports'
 
 # Analytics settings
 RISK_FREE_RATE = 0.02
-LOOKBACK_PERIODS = [20, 50, 200]
+TRADING_DAYS_PER_YEAR = 252
+SMA_SHORT_PERIOD = 20
+SMA_MEDIUM_PERIOD = 50
+SMA_LONG_PERIOD = 200
+RSI_PERIOD = 14
+VOLATILITY_WINDOW = 30
 
 # Chart settings
 CHART_DPI = 300
-CHART_STYLE = 'seaborn'
+CHART_STYLE = "seaborn-v0_8"
+CHART_FIGURE_SIZE = (12, 8)
+
+# Excel formatting
+EXCEL_FONT_NAME = "Calibri"
+EXCEL_HEADER_COLOR = "2F75B5"
+EXCEL_POSITIVE_COLOR = "C6E0B4"
+EXCEL_NEGATIVE_COLOR = "F8CBAD"
 ```
 
 ### Environment Variables
 ```bash
-# Optional: Set custom paths
-export DATA_PATH="/path/to/your/data"
-export OUTPUT_PATH="/path/to/reports"
+# Data configuration
+export DATA_FILE="your_data_file.xlsx"
+export OUTPUT_DIR="/path/to/reports"
+
+# Analytics configuration
+export RISK_FREE_RATE="0.02"
+export CHART_DPI="300"
+
+# Report generation
+export GENERATE_EXCEL="true"
+export GENERATE_CHARTS="true"
+export GENERATE_TEXT_REPORTS="true"
+```
+
+### Validate Configuration
+```bash
+python config.py
 ```
 
 ## 🐛 Troubleshooting
@@ -261,10 +374,7 @@ logging.basicConfig(level=logging.DEBUG)
 ### Development Setup
 ```bash
 # Install development dependencies
-pip install -r requirements-dev.txt
-
-# Run tests
-python -m pytest tests/
+pip install -r requirements.txt
 
 # Code formatting
 black *.py
@@ -272,11 +382,18 @@ flake8 *.py
 ```
 
 ### Adding New Analytics
-1. Create new function in appropriate script
+1. Create new function in appropriate script (`comprehensive_analytics.py` for console, `generate_reports.py` for charts/text, `generate_excel_reports.py` for Excel)
 2. Follow existing naming conventions
 3. Add proper documentation
 4. Include error handling
 5. Update README if needed
+6. Add configuration options to `config.py` if needed
+
+### Web Application Development
+- Templates are in the `templates/` directory
+- Static assets (CSS/JS) are in the `static/` directory
+- Flask routes are defined in `app.py` and `app_with_analytics.py`
+- For Vercel deployment, ensure the `handler()` function is defined
 
 ## 📄 License
 
@@ -293,10 +410,22 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - [pandas Documentation](https://pandas.pydata.org/docs/)
 - [matplotlib Documentation](https://matplotlib.org/stable/contents.html)
 - [openpyxl Documentation](https://openpyxl.readthedocs.io/)
+- [Flask Documentation](https://flask.palletsprojects.com/)
+- [Vercel Python Documentation](https://vercel.com/docs/concepts/functions/serverless-functions)
 
 ## 🔄 Version History
 
-### v1.0.0 (Current)
+### v2.0.0 (Current)
+- Expanded from 8 to 12 analytics modules
+- Added Flask web application with interactive dashboard
+- Added Vercel deployment support
+- Centralized configuration system (`config.py`)
+- Enhanced Excel report generation with professional formatting
+- Chart generation with high-quality visualizations
+- API endpoints for analytics data
+- Comprehensive documentation
+
+### v1.0.0
 - Initial release with 8 analytics modules
 - Excel report generation with professional formatting
 - Chart generation with high-quality visualizations
@@ -306,8 +435,9 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - [ ] Real-time data integration
 - [ ] Additional technical indicators
 - [ ] Machine learning predictions
-- [ ] Web dashboard interface
-- [ ] API integration
+- [ ] Enhanced web dashboard with interactive charts
+- [ ] API authentication and rate limiting
+- [ ] Database integration for historical data
 
 ## 📊 Sample Output
 
